@@ -8,7 +8,8 @@ import { Icon } from '@iconify/react';
 
 const BottomNav = () => {
 	const scrollDirection = useScrollingEffect(); // Use the custom hook
-	const navClass = scrollDirection === 'up' ? '' : 'opacity-25 duration-500';
+	/*const navClass = scrollDirection === 'up' ? '' : 'opacity-25 duration-500';*/
+	const navClass = scrollDirection === 'up' ? '' : 'opacity-90 duration-500';
 
 	const {
 		isHomeActive,
@@ -18,7 +19,8 @@ const BottomNav = () => {
 
 	return (
 		<div
-			className={`fixed bottom-0 w-full py-4 z-10 bg-zinc-100 dark:bg-zinc-950 border-t dark:border-zinc-800 border-zinc-200 shadow-lg sm:hidden ${navClass}`}
+			/*className={`fixed bottom-0 w-full py-4 z-10 bg-zinc-100 dark:bg-zinc-950 border-t dark:border-zinc-800 border-zinc-200 shadow-lg sm:hidden ${navClass}`}*/
+			className={`fixed bottom-0 w-full py-4 z-10 bg-zinc-0 dark:bg-zinc-0 border-t dark:border-zinc-800 border-zinc-200 shadow-lg sm:hidden ${navClass}`}
 		>
 			<div className="flex flex-row justify-around items-center bg-transparent w-full">
 				{/*Home Screen Icon*/}
@@ -35,22 +37,22 @@ const BottomNav = () => {
 				<Link href="/read-share" className="flex items-center">
 					{isReadShareActive ? (
 						<Icon
-							icon="uil:search"
+							icon="uil:book-alt"
 							width="32"
 							height="32"
 							className="stroke-current stroke-5"
 						/>
 					) : (
-						<Icon icon="uil:search" width="32" height="32" />
+						<Icon icon="uil:book-alt" width="32" height="32" />
 					)}
 				</Link>
 
 				{/*Scan Screen Icon*/}
 				<Link href="/scan" className="flex items-center">
 					{isScanActive ? (
-						<Icon icon="mingcute:notification-fill" width="32" height="32" />
+						<Icon icon="ph:barcode-fill" width="32" height="32" />
 					) : (
-						<Icon icon="mingcute:notification-line" width="32" height="32" />
+						<Icon icon="ph:barcode-bold" width="32" height="32" />
 					)}
 				</Link>
 			</div>
