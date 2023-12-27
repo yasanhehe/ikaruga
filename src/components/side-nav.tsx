@@ -57,7 +57,7 @@ const SideNav = () => {
 						isReadShareActive ? 'font-bold' : ''
 					}`}
 				>
-					Explore
+					ReadShare
 				</span>
 			</Link>
 
@@ -75,7 +75,7 @@ const SideNav = () => {
 						isScanActive ? 'font-bold' : ''
 					}`}
 				>
-					Notifications
+					Scan
 				</span>
 			</Link>
 		</div>
