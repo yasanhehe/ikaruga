@@ -8,7 +8,7 @@ import SideNav from '../components/side-nav';
 
 export const metadata: Metadata = {
 	title: 'Ikaruga',
-	description: 'Ikaruga system',
+	description: '"The only thing that you absolutely have to know, is the location of the library," - Albert Einstein.',
 };
 
 /*
