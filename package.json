@@ -10,12 +10,15 @@
     "export": "next export"
   },
   "dependencies": {
+    "@zxing/browser": "^0.1.4",
+    "@zxing/library": "^0.20.0",
     "firebase": "^10.7.1",
     "iconify": "^1.4.0",
     "next": "14.0.3",
     "react": "^18",
     "react-dom": "^18",
-    "react-icons": "^4.12.0"
+    "react-icons": "^4.12.0",
+    "react-use": "^17.4.2"
   },
   "devDependencies": {
     "@iconify/react": "^4.1.1",
