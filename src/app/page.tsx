@@ -1,5 +1,5 @@
 // Import ranking component if its done
-import Ranking from '../components/home/ranking/Ranking';
+import Ranking from '@components/home/ranking/Ranking';
 
 const Home = () => {
 	return (

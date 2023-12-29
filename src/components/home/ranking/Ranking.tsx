@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import '../../../styles/Ajax.css';
-import rankingData from '../../../data/ranking.json';
+import '@styles/Ajax.css';
+import rankingData from '@data/ranking.json';
 
 interface Item {
   '資料情報': string;
