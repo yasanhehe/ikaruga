@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-const WHITE_IP = ['39.111.69.183'];
+const WHITE_IP = [''];
+const DISABLE = true;
 
 export async function middleware(req: NextRequest) {
 	console.warn('jikkousaretayo!')
@@ -8,7 +9,7 @@ export async function middleware(req: NextRequest) {
 	const res = NextResponse.next();
 
 	//too many redirect防止
-	if (path === '/access-denied') {
+	if (path === '/access-denied' || DISABLE) {
 		return res;
 	}
 
