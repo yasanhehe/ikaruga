@@ -2,8 +2,8 @@
 
 import React from 'react';
 import Link from 'next/link';
-import useNavigation from '@/hook/use-navigation';
-import useScrollingEffect from '@/hook/use-scroll';
+import useNavigation from '@hook/use-navigation';
+import useScrollingEffect from '@hook/use-scroll';
 import { Icon } from '@iconify/react';
 
 const BottomNav = () => {
