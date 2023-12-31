@@ -13,7 +13,8 @@ export async function middleware(req: NextRequest) {
 	}
 
 	if (!WHITE_IP.includes(ip)) {
-		return NextResponse.redirect('/restrict');
+		//redirect先はフルパスで指定する事!
+		return NextResponse.redirect('https://example.com/404');
 	}
 
 	return res;
