@@ -14,7 +14,7 @@ export async function middleware(req: NextRequest) {
 
 	if (!WHITE_IP.includes(ip)) {
 		//redirect先はフルパスで指定する事!
-		return NextResponse.redirect('https://ikaruga-8cml4uj2h-confluences-projects.vercel.app/access-denied');
+		return NextResponse.redirect(new URL('/access-denied', req.url));
 	}
 
 	return res;

@@ -1,6 +1,6 @@
 "use client";
 import { useState } from 'react'
-import { Scanner } from '../../components/Scanner'
+import { Scanner } from '@components/Scanner'
 const Scan = () => {
   const [codes, setCodes] = useState<string[]>([])
     const handleGoogleSearch = (code: string) => {
