@@ -10,6 +10,8 @@
     "export": "next export"
   },
   "dependencies": {
+    "@prisma/client": "^5.7.1",
+    "@vercel/postgres": "^0.5.1",
     "@zxing/browser": "^0.1.4",
     "@zxing/library": "^0.20.0",
     "firebase": "^10.7.1",
