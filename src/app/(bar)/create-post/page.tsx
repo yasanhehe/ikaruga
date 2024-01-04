@@ -20,6 +20,9 @@ const CreatePostPage =  () => {
 		try {
 			let ret = await fetch('/api/createPost', {
 				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
 				body: JSON.stringify({
 					title,
 					isbn,
