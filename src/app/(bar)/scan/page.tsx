@@ -21,7 +21,8 @@ const Scan = () => {
       <textarea value={codes.join('\n')} className="mt-4 p-4 border border-gray-300 rounded" />
       <button
         onClick={() => handleGoogleSearch(codes.join())}
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded w-[20%] ml-20 mt-4"
+        disabled={codes.length === 0}
+        className={`my-4 w-full py-4 rounded-md text-white text-xl ${codes.length === 0 ? 'bg-gray-300 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-600'}`}
       >
         図書館のページに飛ぶ
       </button>
