@@ -18,7 +18,7 @@ const CreatePostPage =  () => {
 	const handleOnSubmit = async (ev: React.FormEvent<HTMLFormElement>) => {
 		ev.preventDefault();
 		try {
-			await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/createPost`, {
+			let ret = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/createPost`, {
 				method: "POST",
 				body: JSON.stringify({
 					title,
@@ -26,6 +26,7 @@ const CreatePostPage =  () => {
 					essay,
 				}),
 			});
+			console.warn(ret);
 			router.push('/');
 		} catch (err) {
 			console.error(err);
