@@ -18,11 +18,8 @@ const CreatePostPage =  () => {
 	const handleOnSubmit = async (ev: React.FormEvent<HTMLFormElement>) => {
 		ev.preventDefault();
 		try {
-			let ret = await fetch('/api/createPost', {
+			let ret = await fetch('/api', {
 				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
 				body: JSON.stringify({
 					title,
 					isbn,
@@ -39,6 +36,7 @@ const CreatePostPage =  () => {
 	const handleOnChangeTitle = (
 		ev: React.ChangeEvent<HTMLInputElement>
 	) => {
+		console.warn(ev.target.value)
 		setTitle(ev.target.value);
 		setTitleLength(ev.target.value.length);
 	};
