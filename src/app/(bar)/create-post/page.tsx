@@ -18,7 +18,7 @@ const CreatePostPage =  () => {
 	const handleOnSubmit = async (ev: React.FormEvent<HTMLFormElement>) => {
 		ev.preventDefault();
 		try {
-			let ret = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/createPost`, {
+			let ret = await fetch('/api/createPost', {
 				method: "POST",
 				body: JSON.stringify({
 					title,
