@@ -13,6 +13,6 @@ datasource db {
 model Post {
 	id Int @id @default(autoincrement())
 	title String
-	isdn String
+	isbn String
 	essay String
 }
