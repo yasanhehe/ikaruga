@@ -36,7 +36,6 @@ const CreatePostPage =  () => {
 	const handleOnChangeTitle = (
 		ev: React.ChangeEvent<HTMLInputElement>
 	) => {
-		console.warn(ev.target.value)
 		setTitle(ev.target.value);
 		setTitleLength(ev.target.value.length);
 	};
