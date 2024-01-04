@@ -17,15 +17,19 @@ const CreatePostPage =  () => {
 
 	const handleOnSubmit = async (ev: React.FormEvent<HTMLFormElement>) => {
 		ev.preventDefault();
-		await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/createPost`, {
-			method: "POST",
-			body: JSON.stringify({
-				title,
-				isbn,
-				essay,
-			}),
-		});
-		router.push('/');
+		try {
+			await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/createPost`, {
+				method: "POST",
+				body: JSON.stringify({
+					title,
+					isbn,
+					essay,
+				}),
+			});
+			router.push('/');
+		} catch (err) {
+			console.error(err);
+		}
 	};
 
 	const handleOnChangeTitle = (
@@ -39,7 +43,7 @@ const CreatePostPage =  () => {
 		ev: React.ChangeEvent<HTMLInputElement>
 	) => {
 		setIsbn(ev.target.value);
-	}
+	};
 
 	const handleOnChangeEssay = (
 		ev: React.ChangeEvent<HTMLTextAreaElement>
@@ -47,15 +51,15 @@ const CreatePostPage =  () => {
 		//if (ev.target.value.length > maxEssayLength) return;
 		setEssay(ev.target.value);
 		setEssayLength(ev.target.value.length);
-	}
+	};
 
 	const handleConfirmationToggle = () => {
 		setIsConfirmed(!isConfirmed);
-	}
+	};
 
 return (
 	<div className="flex flex-col pt-4 ml-4 sm:ml-[120px] md:ml-[280px] border-r pb-0 min-h-screen">
-		<span className="px-8 mt-10 font-bold text-3xl">ReadShare</span>
+		<span className="px-8 mt-10 font-bold text-3xl">Shohyo</span>
 		<form onSubmit={handleOnSubmit} className="px-8 py-6 w-full">
 			<div className="mb-6">
 				<label htmlFor="title" className="block text-2xl font-bold text-gray-700 mb-2">タイトル</label>

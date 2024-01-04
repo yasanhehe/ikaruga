@@ -11,10 +11,12 @@ const Scan = () => {
   return (
     <div className="flex flex-col pt-4 ml-4 sm:ml-[120px] md:ml-[280px] border-r pb-0 min-h-screen">
       <span className="px-8 mt-10 font-bold text-3xl">Scan</span>
-      <div className="mt-8 mx-auto w-full max-w-md border border-gray-300 rounded-md overflow-hidden shadow-lg"> {/* カメラ画面のスタイル */}
-        <Scanner
-          onReadCode={(result) => setCodes((codes) => Array.from(new Set([...codes, result.getText()])))}
-        />
+      <div className="mt-8 mx-auto w-full max-w-md border border-gray-300 rounded-md overflow-hidden">
+        <div style={{ width: '100%', aspectRatio: '1' }}> {/* カメラ画面のアスペクト比を保つ */}
+          <Scanner
+            onReadCode={(result) => setCodes((codes) => Array.from(new Set([...codes, result.getText()])))}
+          />
+        </div>
       </div>
       <textarea value={codes.join('\n')} className="mt-4 p-4 border border-gray-300 rounded" />
       <button
@@ -25,6 +27,7 @@ const Scan = () => {
       </button>
     </div>
   );
+
 
 }
 
