@@ -4,21 +4,26 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "prisma generate && prisma db push && next build",
     "start": "next start",
     "lint": "next lint",
     "export": "next export"
   },
   "dependencies": {
+    "@prisma/client": "^5.7.1",
+    "@vercel/postgres": "^0.5.1",
     "@zxing/browser": "^0.1.4",
     "@zxing/library": "^0.20.0",
+    "clsx": "^2.1.0",
     "firebase": "^10.7.1",
     "iconify": "^1.4.0",
     "next": "^14.0.3",
+    "prisma": "^5.7.1",
     "react": "^18",
     "react-dom": "^18",
     "react-icons": "^4.12.0",
-    "react-use": "^17.4.2"
+    "react-use": "^17.4.2",
+    "tailwind-merge": "^2.2.0"
   },
   "devDependencies": {
     "@iconify/react": "^4.1.1",

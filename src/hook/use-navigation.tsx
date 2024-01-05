@@ -8,11 +8,13 @@ const useNavigation = () => {
 	const [isHomeActive, setIsHomeActive] = useState(false);
 	const [isReadShareActive, setIsReadShareActive] = useState(false);
 	const [isScanActive, setIsScanActive] = useState(false);
+	const [isCreatePostActive, setIsCreatePostActive] = useState(false);
 
 	useEffect(() => {
 		setIsHomeActive(false);
 		setIsReadShareActive(false);
 		setIsScanActive(false);
+		setIsCreatePostActive(false);
 
 		switch (pathname) {
 			case '/':
@@ -24,6 +26,9 @@ const useNavigation = () => {
 			case '/scan':
 				setIsScanActive(true);
 				break;
+			case '/create-post':
+				setIsCreatePostActive(true);
+				break;
 			default:
 				break;
 		}
@@ -33,6 +38,7 @@ const useNavigation = () => {
 		isHomeActive,
 		isReadShareActive,
 		isScanActive,
+		isCreatePostActive,
 	};
 };
 

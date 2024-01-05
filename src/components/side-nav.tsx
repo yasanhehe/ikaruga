@@ -10,6 +10,7 @@ const SideNav = () => {
 		isHomeActive,
 		isReadShareActive,
 		isScanActive,
+		isCreatePostActive,
 	} = useNavigation();
 	return (
 		/*<div className="flex-col space-y-4 items-center py-8 hidden sm:flex border-r border-zinc-700 h-full w-[120px] md:w-[250px] md:items-start fixed">*/
@@ -66,6 +67,24 @@ const SideNav = () => {
 			</Link>
 
 			<Link
+				href="/create-post"
+				className="flex flex-row space-x-4 items-center px-4 py-1 rounded-full duration-200 hover:bg-white/10"
+			>
+				{isCreatePostActive ? (
+					<Icon icon="mingcute:pen-fill" width="38" height="38" />
+				) : (
+					<Icon icon="mingcute:pen-line" width="38" height="38" />
+				)}
+				<span
+					className={`text-2xl pt-2 hidden md:flex ${
+						isCreatePostActive ? 'font-bold' : ''
+					}`}
+				>
+					Shohyo
+				</span>
+			</Link>
+
+			<Link
 				href="/scan"
 				className="flex flex-row space-x-4 items-center px-4 py-1 rounded-full duration-200 hover:bg-white/10"
 			>
@@ -82,6 +101,7 @@ const SideNav = () => {
 					Scan
 				</span>
 			</Link>
+
 		</div>
 	);
 };

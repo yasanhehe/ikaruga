@@ -35,28 +35,32 @@ const Ranking: React.FC = () => {
   };
 
   return (
-    <div>
-      <div>
-        {Object.entries(parsedRankingData).map(([genre, data]: [string, Item[]], index: number) => (
-          <div key={index}>
-            <button onClick={() => handleToggleData(genre)}>
-              {index + 1} {genre}
-            </button>
-            {showData[genre] && (
-              <div>
-                {data.map((item: Item, idx: number) => (
-                  <div key={idx} className="data-container">
-                  <a href={item['url']}  target="_blank">資料情報: {item['資料情報']}</a>
-                    <p>請求記号: {item['請求記号']}</p>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
+    <div className="p-4">
+      {Object.entries(parsedRankingData).map(([genre, data]: [string, Item[]], index: number) => (
+        <div key={index} className="mb-4">
+          <button
+            onClick={() => handleToggleData(genre)}
+            className="bg-white text-black text-l font-semibold py-2 px-4 rounded shadow hover:bg-gray-100 focus:outline-none focus:shadow-outline border border-gray"
+          >
+            {index + 1} {genre}
+          </button>
+          {showData[genre] && (
+            <div className="mt-2 border border-gray-200 p-4">
+              {data.map((item: Item, idx: number) => (
+                <div key={idx} className="data-container mb-2">
+                  <a href={item['url']} target="_blank" className="text-blue-500 font-semibold">
+                    資料情報: {item['資料情報']}
+                  </a>
+                  <p className="mt-1">請求記号: {item['請求記号']}</p>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      ))}
     </div>
   );
+
 };
 
 export default Ranking;

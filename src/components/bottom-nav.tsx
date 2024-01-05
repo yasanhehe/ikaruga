@@ -15,6 +15,7 @@ const BottomNav = () => {
 		isHomeActive,
 		isReadShareActive,
 		isScanActive,
+		isCreatePostActive,
 	} = useNavigation();
 
 	return (
@@ -53,6 +54,14 @@ const BottomNav = () => {
 						<Icon icon="ph:barcode-fill" width="32" height="32" />
 					) : (
 						<Icon icon="ph:barcode-bold" width="32" height="32" />
+					)}
+				</Link>
+
+				<Link href="/create-post" className="flex items-center">
+					{isCreatePostActive ? (
+						<Icon icon="mingcute:pen-fill" width="32" height="32" />
+					) : (
+						<Icon icon="mingcute:pen-line" width="32" height="32" />
 					)}
 				</Link>
 			</div>
