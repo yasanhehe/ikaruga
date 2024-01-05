@@ -2,12 +2,24 @@
 
 import { useState, useEffect } from "react";
 import BookReview from "@components/read-share/book-review";
-import reviewsData from "@data/review_test.json";
+import review_test from "@data/review_test.json";
+
+interface review_type {
+	id: string;
+	title: string;
+	isbn: string;
+	essay: string;
+}
 
 const ReadShare = () => {
-	const [reviewData, setReviewData] = useState([]);
+	const [reviewData, setReviewData] = useState<{ id: string; title: string; isbn: string; essay: string; }[]>([]);
 
 	useEffect(() => {
+		if (process.env.NEXT_PUBLIC_POSTGRES_ENABLE === "false") {
+			console.warn('postgres is disabled....')
+			setReviewData(review_test as review_type[]);
+			return ;
+		}
 		try {
 			(async () => {
 			const res = await fetch('/api', {

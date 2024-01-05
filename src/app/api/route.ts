@@ -3,6 +3,15 @@ import prisma from '@lib/prisma';
 export async function POST(
 	request: Request,
 ) {
+	if (process.env.POSTGRES_ENABLE === 'false') {
+		const response = new Response(JSON.stringify({ err: 'Postgres is disabled' }), {
+			status: 500,
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		});
+		return response;
+	}
 	const readableStreamText = await new Response(request.body).text();
 	const { title, isbn, essay } = JSON.parse(readableStreamText);
 	try {
@@ -41,6 +50,15 @@ export async function POST(
 export async function GET(
 	_request: Request,
 ) {
+	if (process.env.POSTGRES_ENABLE === 'false') {
+		const response = new Response(JSON.stringify({ err: 'Postgres is disabled' }), {
+			status: 500,
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		});
+		return response;
+	}
 	try {
 		const data = await prisma.post.findMany();
 		console.log(data);

@@ -17,6 +17,11 @@ const CreatePostPage =  () => {
 
 	const handleOnSubmit = async (ev: React.FormEvent<HTMLFormElement>) => {
 		ev.preventDefault();
+		if (process.env.NEXT_PUBLIC_POSTGRES_ENABLE === "false") {
+			console.warn('postgres is disabled....');
+			router.push('/');
+			return ;
+		}
 		try {
 			let ret = await fetch('/api', {
 				method: "POST",
@@ -30,6 +35,7 @@ const CreatePostPage =  () => {
 			router.push('/');
 		} catch (err) {
 			console.error(err);
+			router.push('/');
 		}
 	};
 
