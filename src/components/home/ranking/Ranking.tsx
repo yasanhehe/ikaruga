@@ -6,7 +6,8 @@ import rankingData from '@data/ranking.json';
 import Image from 'next/image';
 
 
-const images = ['/image/tp-gold-ikaruga.png', '/image/tp-silver-ikaruga.png', '/image/tp-bronze-ikaruga.png'];
+const images = ['/image/SVG/ikkocho2.svg', '/image/SVG/futaobichidori2.svg', '/image/SVG/sankocho2.svg'];
+const details = ['一紅鳥: イッコウチョウ', '二帯千鳥: フタオビチドリ', '三光鳥: サンコウチョウ'];
 
 interface Item {
   '資料情報': string;
@@ -48,16 +49,17 @@ return (
               <button
                 onClick={() => handleToggleData(genre)}
                 className="bg-white text=black text-l font-semibold py-2 px-4 rounded shadow hover:bg-gray-100 focus:outline-none focus:shadow-outline border border-gray"
-                style={{ width: '400px', fontSize: index < 3 ? '150%' : '100%' }}
+                style={{ width: '600px', fontSize: index < 3 ? '150%' : '100%' }}
               >
                 <span>
                   {index < 3 ? (
                     <div className="flex items-center">
                       <Image
                         src={images[index]}
+                        title={details[index]}
                         alt={`Image for ${genre}`}
-                        width={30}
-                        height={30}
+                        width={50}
+                        height={50}
                         className="ml-2"
                         placeholder="empty"
                       />
