@@ -6,7 +6,7 @@ import rankingData from '@data/ranking.json';
 import Image from 'next/image';
 
 
-const images = ['/image/SVG/ikkocho2.svg', '/image/SVG/futaobichidori2.svg', '/image/SVG/sankocho2.svg'];
+const images = ['/ikkocho2.svg', '/futaobichidori2.svg', '/sankocho2.svg'];
 const details = ['一紅鳥: イッコウチョウ', '二帯千鳥: フタオビチドリ', '三光鳥: サンコウチョウ'];
 
 interface Item {
