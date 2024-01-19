@@ -16,12 +16,12 @@ export const Scanner = ({ onReadCode }: ScannerProps) => {
     await codeReader.decodeFromVideoDevice(undefined, videoRef.current, (result, error) => {
       if (!result) return
       if (error) {
-        console.log('ERROR!! : ', error)
+        console.warn('ERROR!! : ', error)
         return
       }
       onReadCode?.(result)
     })
   }, 2000)
 
-  return <video style={{ width: '50%', height: '50%' }} ref={videoRef} />
+  return <video style={{ width: '100%', height: '100%' }} ref={videoRef} />
 }

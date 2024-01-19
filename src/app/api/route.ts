@@ -1,6 +1,8 @@
 import prisma from '@lib/prisma';
 
 export async function POST(
+	// requestは、title, isbn, essayを含む
+	// request = { title: string, isbn: string, essay: string }
 	request: Request,
 ) {
 	if (process.env.POSTGRES_ENABLE === 'false') {
@@ -48,7 +50,9 @@ export async function POST(
 }
 
 export async function GET(
-	_request: Request,
+	// requestは、ページ, 検索キーワードを含む
+	// request = { page: int, keyword: string }
+	request: Request,
 ) {
 	if (process.env.POSTGRES_ENABLE === 'false') {
 		const response = new Response(JSON.stringify({ err: 'Postgres is disabled' }), {
@@ -59,8 +63,22 @@ export async function GET(
 		});
 		return response;
 	}
+	const readableStreamText = await new Response(request.body).text();
+	const { pagestr, keyword } = JSON.parse(readableStreamText);
+	const perPage = 10;
+	//page is string
+	const page = parseInt(pagestr);	
+	const skip = perPage * page;
 	try {
-		const data = await prisma.post.findMany();
+		const data = await prisma.post.findMany(
+			{
+				skip,
+				take: perPage,
+				where: {
+					title: keyword === '' ? undefined : { contains: keyword },
+				},
+			}
+		);
 		console.log(data);
 		const response = new Response(JSON.stringify({ data }), {
 			status: 200,

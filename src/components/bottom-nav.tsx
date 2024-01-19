@@ -9,7 +9,7 @@ import { Icon } from '@iconify/react';
 const BottomNav = () => {
 	const scrollDirection = useScrollingEffect(); // Use the custom hook
 	/*const navClass = scrollDirection === 'up' ? '' : 'opacity-25 duration-500';*/
-	const navClass = scrollDirection === 'up' ? '' : 'opacity-90 duration-500';
+	const navClass = scrollDirection === 'up' ? 'opacity-100 duration-500' : 'opacity-70 duration-500';
 
 	const {
 		isHomeActive,
@@ -21,7 +21,7 @@ const BottomNav = () => {
 	return (
 		<div
 			/*className={`fixed bottom-0 w-full py-4 z-10 bg-zinc-100 dark:bg-zinc-950 border-t dark:border-zinc-800 border-zinc-200 shadow-lg sm:hidden ${navClass}`}*/
-			className={`fixed bottom-0 w-full py-4 z-10 bg-zinc-0 dark:bg-zinc-0 border-t dark:border-zinc-800 border-zinc-200 shadow-lg sm:hidden ${navClass}`}
+			className={`fixed bottom-0 w-full py-4 z-10 bg-zinc-100 dark:bg-zinc-0 border-t dark:border-zinc-800 border-zinc-200 shadow-lg sm:hidden ${navClass}`}
 		>
 			<div className="flex flex-row justify-around items-center bg-transparent w-full">
 				{/*Home Screen Icon*/}
