@@ -28,7 +28,7 @@ const ReadShare = () => {
 		}
 		try {
 			(async () => {
-			const res = await fetch('/api', {
+			const res = await fetch('/api/get-shohyo', {
 				method: 'GET',
 				headers: {
 					'Content-Type': 'application/json'
