@@ -48,7 +48,7 @@ const ReadShare = () => {
 	};
 
 	const handleOnChangeKeyword = (
-		ev: React.ChangeEvent<HTMLTextAreaElement>
+		ev: React.ChangeEvent<HTMLInputElement>
 	) => {
 		setKeyword(ev.target.value);
 		setKeywordLength(ev.target.value.length);
