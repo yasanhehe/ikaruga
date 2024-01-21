@@ -14,6 +14,7 @@ interface review_type {
 
 const ReadShare = () => {
 	const [page, setPage] = useState<number>(1);
+	const [maxPage, setMaxPage] = useState<number>(1);
 	const maxKeywordLength = 100;
 	const [keywordLength, setKeywordLength] = useState<number>(0);
 	const [searchAble, setSearchAble] = useState<boolean>(false);
@@ -22,7 +23,6 @@ const ReadShare = () => {
 	const [nextExist, setNextExist] = useState<boolean>(false);
 	const [previousExist, setPreviousExist] = useState<boolean>(false);
 	const [loading, setLoading] = useState<boolean>(true);
-	const [maxPage, setMaxPage] = useState<number>(0);
 
 
 	const loadData = async () => {
@@ -44,11 +44,13 @@ const ReadShare = () => {
 					keyword,
 				}),
 			});
-			await res.json().then((resJson) => {
-				setReviewData(resJson.data);
-				setMaxPage(resJson.maxPage);
+			const reviewJson = await res.json().then((json) => {
+				console.error(json.maxPage);
+				setMaxPage(json.maxPage);
+				return json.data;
 			});
-			isPageExist();
+			setReviewData(reviewJson);
+			console.log(reviewJson);
 			})();
 		} catch (err) {
 			console.error(err);
@@ -58,7 +60,6 @@ const ReadShare = () => {
 
 	const handleOnSearch = async (ev: React.FormEvent<HTMLFormElement>) => {
 		ev.preventDefault();
-		setPage(1);
 		loadData();
 		setSearchAble(false);
 	};
@@ -73,29 +74,28 @@ const ReadShare = () => {
 
 	const isPageExist = () => {
 		if (page > 1) {
-			console.log('previous exist');
 			setPreviousExist(true);
-		} else {
-			setPreviousExist(false);
 		}
 		if (page < maxPage) {
-			console.log('next exist');
 			setNextExist(true);
-		} else {
-			setNextExist(false);
 		}
-		console.log('maxPage: ', maxPage);
 	}
 
 	const handleOnClickPrevious = () => {
 		setPage(page - 1);
+		isPageExist();
 		loadData();
 	}
 
 	const handleOnClickNext = () => {
 		setPage(page + 1);
+		isPageExist();
 		loadData();
 	}
+
+	useEffect(() => {
+			loadData();
+	}, []);
 
 	return (
 		/*<div className="flex flex-col pt-4 sm:ml-[120px] md:ml-[250px] sm:border-r sm:border-zinc-700 pb-20 min-h-screen">*/
@@ -110,14 +110,14 @@ const ReadShare = () => {
 					value={keyword}
 					maxLength={maxKeywordLength}
 					onChange={handleOnChangeKeyword}
-					className="w-full h-12 px-4 rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+					className="w-full h-12 px-4 rounded-md border-gray-300 shadow-sm focus:border-slate-300 focus:ring focus:ring-slate-200 focus:ring-opacity-50"
 					/>
 				</div>
 				<button
 				type="submit"
 				disabled={!searchAble}
-				//className={"w-full py-4 rounded-md text-white text-xl bg-blue-500 hover:bg-blue-600"}
-				className={`w-full py-4 rounded-md text-white text-xl ${ searchAble ? 'bg-blue-500 hover:bg-blue-600' : 'bg-gray-300 cursor-not-allowed'}`}
+				//className={"w-full py-4 rounded-md text-white text-xl bg-slate-500 hover:bg-slate-600"}
+				className={`w-full py-4 rounded-md text-white text-xl ${ searchAble ? 'bg-slate-500 hover:bg-slate-600' : 'bg-gray-300 cursor-not-allowed'}`}
 				>
 				{keywordLength != 0 ? '本を検索' : '本を検索'}
 				</button>
@@ -125,20 +125,58 @@ const ReadShare = () => {
 			<div className="w-full">
 				{ loading ? (
 					<div className="flex justify-center">
-						<div className="animate-spin mb-10 h-10 w-10 border-4 border-blue-500 rounded-full border-t-transparent"></div>
+						<div className="animate-spin mb-10 h-10 w-10 border-4 border-slate-500 rounded-full border-t-transparent"></div>
 					</div>
 				) : null }
 				{reviewData.map((data, index) => (
 						<BookReview key={index} shohyo={data} />
 				))}
 			</div>
-			<div className="flex justify-center mt-10">
-				<button onClick={handleOnClickPrevious} disabled={!previousExist} className={`w-full py-4 my-4 mx-4 rounded-md text-white text-xl ${ previousExist ? 'bg-blue-500 hover:bg-blue-600' : 'bg-gray-300 cursor-not-allowed'}`}>
-					前のページ
-				</button>
-				<button onClick={handleOnClickNext} disabled={!nextExist} className={`w-full py-4 my-4 mx-4 rounded-md text-white text-xl ${ nextExist ? 'bg-blue-500 hover:bg-blue-600' : 'bg-gray-300 cursor-not-allowed'}`}>
-					次のページ
-				</button>
+			<div className="flex justify-center mt-4">
+				<a
+					href="#"
+					className="flex items-center justify-center px-4 h-10 text-base font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white me-2"
+					onClick={handleOnClickPrevious}
+				>
+					<svg
+						className="w-3.5 h-3.5 me-2 rtl:rotate-180"
+						aria-hidden="true"
+						xmlns="http://www.w3.org/2000/svg"
+						fill="none"
+						viewBox="0 0 14 10"
+					>
+						<path
+							stroke="currentColor"
+							strokeLinecap="round"
+							strokeLinejoin="round"
+							strokeWidth="2"
+							d="M13 5H1m0 0 4 4M1 5l4-4"
+						/>
+					</svg>
+					Previous
+				</a>
+				<a
+					href="#"
+					className="flex items-center justify-center px-4 h-10 text-base font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+					onClick={handleOnClickNext}
+				>
+					Next
+					<svg
+						className="w-3.5 h-3.5 ms-2 rtl:rotate-180"
+						aria-hidden="true"
+						xmlns="http://www.w3.org/2000/svg"
+						fill="none"
+						viewBox="0 0 14 10"
+					>
+						<path
+							stroke="currentColor"
+							strokeLinecap="round"
+							strokeLinejoin="round"
+							strokeWidth="2"
+							d="M1 5h12m0 0L9 1m4 4L9 9"
+						/>
+					</svg>
+				</a>
 			</div>
 		</div>
 	)

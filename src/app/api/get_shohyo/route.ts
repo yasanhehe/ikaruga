@@ -23,7 +23,7 @@ export async function POST(
 	try {
 		const data = await prisma.post.findMany(
 			{
-				skip,
+				//skip,
 				take: perPage,
 				where: {
 					title: keyword === '' ? undefined : { contains: keyword },
