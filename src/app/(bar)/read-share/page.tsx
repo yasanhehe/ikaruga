@@ -38,11 +38,12 @@ const ReadShare = () => {
 					keyword,
 				}),
 			});
-			const reviewJson = await res.json().then((json) => json.data);
-			setReviewData(reviewJson);
-			console.log(reviewJson);
+			//const reviewJson = await res.json().then((json) => json.data);
+			//setReviewData(reviewJson);
+			//console.log(reviewJson);
 		})();
 		} catch (err) {
+			console.error('err occured in handleOnChange');
 			console.error(err);
 		};
 	};
