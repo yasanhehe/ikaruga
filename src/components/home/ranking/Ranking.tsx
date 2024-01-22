@@ -48,8 +48,8 @@ return (
             <div className="flex items-center">
               <button
                 onClick={() => handleToggleData(genre)}
-                className="bg-white text=black text-l font-semibold py-2 px-4 rounded shadow hover:bg-gray-100 focus:outline-none focus:shadow-outline border border-gray"
-                style={{ width: '600px', fontSize: index < 3 ? '150%' : '100%' }}
+                className=" w-full max-w-screen-xl mx-auto text=black font-semibold bg-white rounded-xl py-2 px-4 pyoverflow-hidden shadow"
+                style={{ fontSize: index < 3 ? '150%' : '100%' }}
               >
                 <span>
                   {index < 3 ? (
