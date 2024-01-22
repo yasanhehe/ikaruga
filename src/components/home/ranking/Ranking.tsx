@@ -40,15 +40,15 @@ const Ranking: React.FC = () => {
   };
 
 return (
-    <div className="p-4">
+    <div className="pl-4 pr-4 mb-20 w-2/3 md:w-full">
       {Object.entries(parsedRankingData).map(([genre, data]: [string, Item[]], index: number) => {
 
         return (
-          <div key={index} className="mb-4">
+          <div key={index} className="my-4 w-full">
             <div className="flex items-center">
               <button
                 onClick={() => handleToggleData(genre)}
-                className="bg-white text=black text-l font-semibold py-2 px-4 rounded shadow hover:bg-gray-100 focus:outline-none focus:shadow-outline border border-gray"
+                className="w-full text-black font-semibold bg-white rounded-xl py-2 px-4 pyoverflow-hidden shadow mx-4"
                 style={{ width: '600px', fontSize: index < 3 ? '150%' : '100%' }}
               >
                 <span>
@@ -76,10 +76,10 @@ return (
             </div>
 
             {showData[genre] && (
-              <div className="mt-2 border border-gray-200 p-4">
+              <div className="mt-2 rounded-md shadow-md p-4">
                 <p>最新10件</p>
                 {data.map((item: Item, idx: number) => (
-                  <div key={idx} className="data-container mb-2">
+                  <div key={idx} className="shadow-md mb-2 p-4">
                     <a href={item['url']} target="_blank" className="text-blue-500 font-semibold">
                       {item['資料情報']}
                     </a>

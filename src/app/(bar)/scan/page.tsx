@@ -22,7 +22,7 @@ const Scan = () => {
       <button
         onClick={() => handleGoogleSearch(codes.join())}
         disabled={codes.length === 0}
-        className={`my-4 w-full py-4 rounded-md text-white text-xl ${codes.length === 0 ? 'bg-gray-300 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-600'}`}
+        className={`my-4 w-full py-4 rounded-md text-white text-xl mb-20 ${codes.length === 0 ? 'bg-gray-300 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-600'}`}
       >
         図書館のページに飛ぶ
       </button>

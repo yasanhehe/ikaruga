@@ -4,6 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import useNavigation from '@hook/use-navigation';
 import { Icon } from '@iconify/react';
+import Image from 'next/image';
 
 const SideNav = () => {
 	const {
@@ -17,9 +18,9 @@ const SideNav = () => {
 		<div className="flex-col space-y-4 items-center py-8 hidden md:flex border-r h-full w-full md:w-[250px] md:items-start fixed">
 			<Link
 				href="/"
-				className="flex flex-row space-x-1 items-center hover:bg-white/10 p-4 rounded-full duration-200"
+				className="flex flex-row space-x-1 items-center hover:bg-white/10 p-2 rounded-full duration-200"
 			>
-				<Icon icon="mdi:bird" width="38" height="38" />
+				<Image src="/ikaruga.svg" alt="Home" width="70" height="70" />
 				<span className="text-3xl pt-0 hidden md:flex font-bold">
 					Ikaruga
 				</span>
