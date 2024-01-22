@@ -114,7 +114,7 @@ const ReadShare = () => {
 	return (
 		/*<div className="flex flex-col pt-4 sm:ml-[120px] md:ml-[250px] sm:border-r sm:border-zinc-700 pb-20 min-h-screen">*/
 		/*<label htmlFor="search" className="block text-2xl font-bold text-gray-700 mb-2">検索</label>*/
-		<div className="flex flex-col pt-4 ml-4 sm:ml-[120px] md:ml-[280px] pb-0 min-h-screen">
+		<div className="flex flex-col pt-4 ml-4 md:ml-[280px] pb-0 min-h-screen">
 			<span className="px-8 mt-10 font-bold text-3xl">ReadShare</span>
 			<form onSubmit={handleOnSearch} className="md:px-8 py-6 w-full">
 				<div className="flex flex-row mb-6 md:my-4">
@@ -124,7 +124,7 @@ const ReadShare = () => {
 					value={keyword}
 					maxLength={maxKeywordLength}
 					onChange={handleOnChangeKeyword}
-					className="w-2/3 px-4 md:mx-4 mx-1 rounded-md shadow-xl focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+					className="w-2/3 px-4 md:mx-4 mx-1 rounded-md shadow-xl focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 border border-gray-300"
 					/>
 					<button
 					type="submit"
@@ -170,11 +170,11 @@ const ReadShare = () => {
 				maxLength={maxPage.toString().length}
 				onKeyPress={(e) => {if(e.key.match(/[^0-9]/)) e.preventDefault();}}
 				onChange={handleOnChangePage}
-				className="rounded-md shadow-xl placeholder-gray-600 text-xl text-center w-20 h-12 border-gray-800 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+				className="rounded-md shadow-xl placeholder-gray-600 text-xl text-center w-20 h-12 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 border"
 				placeholder={page.toString()}>
 				</input>
-				<span className="text-xl text-center h-12 w-12 pt-2">/</span>
-				<span className="text-xl text-center h-12 w-12 pt-2">{maxPage}</span>
+				<span className="text-xl text-center h-12 w-12 pt-3">/</span>
+				<span className="text-xl text-center h-12 w-12 pt-3">{maxPage}</span>
 			</div>
 		</div>
 	)

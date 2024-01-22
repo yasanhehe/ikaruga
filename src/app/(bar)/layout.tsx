@@ -1,10 +1,10 @@
 import '@styles/globals.css'
 
 import type { Metadata } from 'next';
-
 import BottomNav from '@components/bottom-nav';
 import MaxWidthWrapper from '@components/max-width-wrapper';
 import SideNav from '@components/side-nav';
+import Favicon from '@public/favicon.ico';
 
 export const metadata: Metadata = {
 	title: 'Ikaruga',

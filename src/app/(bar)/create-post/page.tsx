@@ -65,7 +65,7 @@ const CreatePostPage =  () => {
 	};
 
 return (
-	<div className="flex flex-col pt-4 ml-4 sm:ml-[120px] md:ml-[280px] pb-0 min-h-screen">
+	<div className="flex flex-col pt-4 ml-4 md:ml-[280px] pb-0 min-h-screen">
 		<span className="px-8 mt-10 font-bold text-3xl">Shohyo</span>
 		<form onSubmit={handleOnSubmit} className="px-8 py-6 w-full">
 			<div className="mb-6">
@@ -76,7 +76,7 @@ return (
 					value={title}
 					maxLength={maxTitleLength}
 					onChange={handleOnChangeTitle}
-					className="w-full h-12 px-4 rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+					className="w-full h-12 px-4 rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 border"
 				/>
 			</div>
 			<div className="mb-6">
@@ -88,7 +88,7 @@ return (
 					maxLength={maxIsbnLength}
 					onKeyPress={(e) => {if(e.key.match(/[^0-9]/)) e.preventDefault();}}
 					onChange={handleOnChangeIsbn}
-					className="w-full h-12 px-4 rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+					className="w-full h-12 px-4 rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 border"
 				/>
 			</div>
 			<div className="mb-6">
@@ -98,7 +98,7 @@ return (
 					value={essay}
 					maxLength={maxEssayLength}
 					onChange={handleOnChangeEssay}
-					className="w-full px-4 py-3 rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+					className="w-full px-4 py-3 rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 border"
 				/>
 				<p className="text-sm text-gray-500">{essayLength}/{maxEssayLength}</p>
 			</div>
@@ -117,7 +117,7 @@ return (
 			<button
 				type="submit"
 				disabled={!isConfirmed}
-				className={`w-full py-4 rounded-md text-white text-xl ${isConfirmed ? 'bg-blue-500 hover:bg-blue-600' : 'bg-gray-300 cursor-not-allowed'}`}
+				className={`w-full py-4 rounded-md text-white text-xl mb-20 ${isConfirmed ? 'bg-blue-500 hover:bg-blue-600' : 'bg-gray-300 cursor-not-allowed'}`}
 			>
 				{isConfirmed ? '投稿する' : '確認が必要です'}
 			</button>
