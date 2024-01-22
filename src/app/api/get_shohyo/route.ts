@@ -15,23 +15,23 @@ export async function POST(
 		return response;
 	}
 	const readableStreamText = await new Response(request.body).text();
-	const { pagestr, keyword } = JSON.parse(readableStreamText);
+	const { page, keyword } = JSON.parse(readableStreamText);
 	const perPage = 10;
-	//page is string
-	const page = parseInt(pagestr);	
-	const skip = perPage * page;
+	const skip = perPage * (page - 1);
+	const where = keyword === '' ? undefined : { title: { contains: keyword } };
 	try {
 		const data = await prisma.post.findMany(
 			{
-				//skip,
+				skip: skip,
 				take: perPage,
-				where: {
-					title: keyword === '' ? undefined : { contains: keyword },
+				where: where,
+				orderBy: {
+					id: 'desc',
 				},
 			}
 		);
-		console.log(data);
-		const response = new Response(JSON.stringify({ data }), {
+		const maxPage = Math.ceil(await prisma.post.count({ where: where }) / perPage);
+		const response = new Response(JSON.stringify({ data, maxPage }), {
 			status: 200,
 			headers: {
 				'Content-Type': 'application/json'

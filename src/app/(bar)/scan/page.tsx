@@ -5,7 +5,7 @@ const Scan = () => {
   const [codes, setCodes] = useState<string[]>([])
     const handleGoogleSearch = (code: string) => {
     const searchQuery = encodeURIComponent(code);
-    const searchUrl = `https://lib.aiit.ac.jp/index.php?action=pages_view_main&active_action=v3search_view_main_init&block_id=296&tab_num=0&op_param=words%3D${searchQuery}%26srhRevTagFlg%3D#v3search_view_main_init`;
+	const searchUrl = `https://opac.std.cloud.iliswave.jp/iwjs0020opc/ctlsrh.do?srhclm1=isbn&valclm1=${searchQuery}`
     window.location.href = searchUrl;
   };
   return (

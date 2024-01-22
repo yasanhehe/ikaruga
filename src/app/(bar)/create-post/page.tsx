@@ -80,7 +80,7 @@ return (
 				/>
 			</div>
 			<div className="mb-6">
-				<label htmlFor="isbn" className="block text-2xl font-bold text-gray-700 mb-2">ISBN (任意)</label>
+				<label htmlFor="isbn" className="block text-2xl font-bold text-gray-700 mb-2">ISBN</label>
 				<input
 					type="text"
 					id="isbn"

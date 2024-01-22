@@ -14,18 +14,16 @@ interface review_type {
 
 const ReadShare = () => {
 	const [page, setPage] = useState<number>(1);
+	const [maxPage, setMaxPage] = useState<number>(1);
 	const maxKeywordLength = 100;
 	const [keywordLength, setKeywordLength] = useState<number>(0);
 	const [searchAble, setSearchAble] = useState<boolean>(false);
 	const [keyword, setKeyword] = useState<string>('');
 	const [reviewData, setReviewData] = useState<{ id: string; title: string; isbn: string; essay: string; }[]>([]);
-	const [nextExist, setNextExist] = useState<boolean>(false);
-	const [previousExist, setPreviousExist] = useState<boolean>(false);
 	const [loading, setLoading] = useState<boolean>(true);
-	const [maxPage, setMaxPage] = useState<number>(0);
 
 
-	const loadData = async () => {
+	const loadData = async (pageCnt: number, searchStr: string) => {
 		if (process.env.NEXT_PUBLIC_POSTGRES_ENABLE === "false") {
 			console.warn('postgres is disabled....')
 				setReviewData(review_test as review_type[]);
@@ -40,15 +38,17 @@ const ReadShare = () => {
 					'Content-Type': 'application/json'
 				},
 				body: JSON.stringify({
-					page,
-					keyword,
+					page: pageCnt,
+					keyword: searchStr,
 				}),
 			});
-			await res.json().then((resJson) => {
-				setReviewData(resJson.data);
-				setMaxPage(resJson.maxPage);
+			const reviewJson = await res.json().then((json) => {
+				console.error(json.maxPage);
+				setMaxPage(json.maxPage);
+				return json.data;
 			});
-			isPageExist();
+			setReviewData(reviewJson);
+			console.log(reviewJson);
 			})();
 		} catch (err) {
 			console.error(err);
@@ -59,9 +59,18 @@ const ReadShare = () => {
 	const handleOnSearch = async (ev: React.FormEvent<HTMLFormElement>) => {
 		ev.preventDefault();
 		setPage(1);
-		loadData();
+		// Reactではstateがレンダリング後更新されるため、引数で渡す。スマートな方法を検討中。
+		loadData(1, keyword);
 		setSearchAble(false);
 	};
+
+	const handleOnClear = async (ev: any) => {
+		ev.preventDefault();
+		setKeyword('');
+		setKeywordLength(0);
+		loadData(1, '');
+		setSearchAble(false);
+	}
 
 	const handleOnChangeKeyword = (
 		ev: React.ChangeEvent<HTMLInputElement>
@@ -71,74 +80,101 @@ const ReadShare = () => {
 		setSearchAble(true);
 	};
 
-	const isPageExist = () => {
-		if (page > 1) {
-			console.log('previous exist');
-			setPreviousExist(true);
-		} else {
-			setPreviousExist(false);
-		}
-		if (page < maxPage) {
-			console.log('next exist');
-			setNextExist(true);
-		} else {
-			setNextExist(false);
-		}
-		console.log('maxPage: ', maxPage);
-	}
-
 	const handleOnClickPrevious = () => {
+		console.warn("previous");
 		setPage(page - 1);
-		loadData();
+		loadData(page - 1, keyword);
 	}
 
 	const handleOnClickNext = () => {
+		console.warn("next");
 		setPage(page + 1);
-		loadData();
+		loadData(page + 1, keyword);
 	}
+
+	const handleOnChangePage = async (ev: any) => {
+		ev.preventDefault();
+		console.warn(ev.currentTarget.value);
+		if (ev.currentTarget.value > maxPage) {
+			ev.currentTarget.value = maxPage;
+		} else if (ev.currentTarget.value == '') {
+			ev.currentTarget.value = '';
+			return ;
+		} else if (ev.currentTarget.value < 1) {
+			ev.currentTarget.value = 2;
+		}
+		setPage(parseInt(ev.currentTarget.value));
+		loadData(parseInt(ev.currentTarget.value), keyword);
+	}
+
+	useEffect(() => {
+			loadData(1, '');
+	}, []);
 
 	return (
 		/*<div className="flex flex-col pt-4 sm:ml-[120px] md:ml-[250px] sm:border-r sm:border-zinc-700 pb-20 min-h-screen">*/
 		/*<label htmlFor="search" className="block text-2xl font-bold text-gray-700 mb-2">検索</label>*/
 		<div className="flex flex-col pt-4 ml-4 sm:ml-[120px] md:ml-[280px] pb-0 min-h-screen">
 			<span className="px-8 mt-10 font-bold text-3xl">ReadShare</span>
-			<form onSubmit={handleOnSearch} className="px-8 py-6 w-full">
-				<div className="mb-6">
+			<form onSubmit={handleOnSearch} className="md:px-8 py-6 w-full">
+				<div className="flex flex-row mb-6 md:my-4">
 					<input
 					type="text"
 					id="search"
 					value={keyword}
 					maxLength={maxKeywordLength}
 					onChange={handleOnChangeKeyword}
-					className="w-full h-12 px-4 rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+					className="w-2/3 px-4 md:mx-4 mx-1 rounded-md shadow-xl focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
 					/>
+					<button
+					type="submit"
+					disabled={!searchAble}
+					className={`w-1/3 py-4 md:mx-4 mx-1 rounded-md text-white text-xl ${ searchAble ? 'bg-indigo-500 hover:bg-indigo-600 hover:shadow-xl' : 'bg-gray-300 cursor-not-allowed'}`}
+					>
+					検索
+					</button>
+					<button
+					type="button"
+					disabled={keywordLength == 0}
+					onClick={handleOnClear}
+					className={`w-1/3 py-4 md:mx-4 mx-1 rounded-md text-white text-xl ${ !(keywordLength == 0) ? 'bg-indigo-500 hover:bg-indigo-600 hover:shadow-xl' : 'bg-gray-300 cursor-not-allowed'}`}
+					>
+					クリア
+					</button>
 				</div>
-				<button
-				type="submit"
-				disabled={!searchAble}
-				//className={"w-full py-4 rounded-md text-white text-xl bg-blue-500 hover:bg-blue-600"}
-				className={`w-full py-4 rounded-md text-white text-xl ${ searchAble ? 'bg-blue-500 hover:bg-blue-600' : 'bg-gray-300 cursor-not-allowed'}`}
-				>
-				{keywordLength != 0 ? '本を検索' : '本を検索'}
-				</button>
 			</form>
-			<div className="w-full">
+			<div className="md:ml-[20px] justify-center w-full px-4">
 				{ loading ? (
 					<div className="flex justify-center">
-						<div className="animate-spin mb-10 h-10 w-10 border-4 border-blue-500 rounded-full border-t-transparent"></div>
+						<div className="animate-spin mb-10 h-10 w-10 border-4 border-indigo-500 rounded-full border-t-transparent"></div>
 					</div>
 				) : null }
+				{ maxPage == 0 ? (
+					<BookReview shohyo={{id: '', title: '', isbn: '', essay: '該当する本がありませんでした。'}} />
+				): null}
 				{reviewData.map((data, index) => (
 						<BookReview key={index} shohyo={data} />
 				))}
 			</div>
-			<div className="flex justify-center mt-10">
-				<button onClick={handleOnClickPrevious} disabled={!previousExist} className={`w-full py-4 my-4 mx-4 rounded-md text-white text-xl ${ previousExist ? 'bg-blue-500 hover:bg-blue-600' : 'bg-gray-300 cursor-not-allowed'}`}>
+			<div className="flex justify-center my-6 md:ml-[20px]">
+				<button onClick={handleOnClickPrevious} disabled={page <= 1} className={`w-full py-4 my-4 mx-4 rounded-md text-white text-xl ${ page <= 1 ? 'bg-gray-300 cursor-not-allowed' : 'bg-indigo-500 hover:bg-indigo-600 hover:shadow-xl'}`}>
 					前のページ
 				</button>
-				<button onClick={handleOnClickNext} disabled={!nextExist} className={`w-full py-4 my-4 mx-4 rounded-md text-white text-xl ${ nextExist ? 'bg-blue-500 hover:bg-blue-600' : 'bg-gray-300 cursor-not-allowed'}`}>
+				<button onClick={handleOnClickNext} disabled={page >= maxPage} className={`w-full py-4 my-4 mx-4 rounded-md text-white text-xl ${ page >= maxPage ? 'bg-gray-300 cursor-not-allowed' : 'bg-indigo-500 hover:bg-indigo-600 hover:shadow-xl'}`}>
 					次のページ
 				</button>
+			</div>
+			<div className="flex flex-row justify-center mb-20">
+				<input
+				type="text"
+				maxLength={maxPage.toString().length}
+				onKeyPress={(e) => {if(e.key.match(/[^0-9]/)) e.preventDefault();}}
+				onChange={handleOnChangePage}
+				className="rounded-md shadow-xl placeholder-gray-600 text-xl text-center w-20 h-12 border-gray-800 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+				placeholder={page.toString()}>
+				</input>
+				<span className="text-xl text-center h-12 w-12 pt-2">/</span>
+				<span className="text-xl text-center h-12 w-12 pt-2">{maxPage}</span>
 			</div>
 		</div>
 	)
