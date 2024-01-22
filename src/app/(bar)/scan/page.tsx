@@ -5,14 +5,14 @@ const Scan = () => {
   const [codes, setCodes] = useState<string[]>([])
     const handleGoogleSearch = (code: string) => {
     const searchQuery = encodeURIComponent(code);
-    const searchUrl = `https://lib.aiit.ac.jp/index.php?action=pages_view_main&active_action=v3search_view_main_init&block_id=296&tab_num=0&op_param=words%3D${searchQuery}%26srhRevTagFlg%3D#v3search_view_main_init`;
+	const searchUrl = `https://opac.std.cloud.iliswave.jp/iwjs0020opc/ctlsrh.do?srhclm1=isbn&valclm1=${searchQuery}`
     window.location.href = searchUrl;
   };
   return (
-    <div className="flex flex-col pt-4 ml-4 sm:ml-[120px] md:ml-[280px] border-r pb-0 min-h-screen">
+    <div className="flex flex-col pt-4 ml-4 sm:ml-[120px] md:ml-[280px] pb-0 min-h-screen">
       <span className="px-8 mt-10 font-bold text-3xl">Scan</span>
       <div className="mt-8 mx-auto w-full max-w-md border border-gray-300 rounded-md overflow-hidden">
-        <div style={{ width: '50%', aspectRatio: '1' }}> {/* カメラ画面のアスペクト比を保つ */}
+        <div style={{ width: '100%'}}> {/* カメラ画面のアスペクト比を保つ */}
           <Scanner
             onReadCode={(result) => setCodes((codes) => Array.from(new Set([...codes, result.getText()])))}
           />

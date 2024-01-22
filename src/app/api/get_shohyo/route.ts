@@ -1,8 +1,8 @@
 import prisma from '@lib/prisma';
 
 export async function POST(
-	// requestは、title, isbn, essayを含む
-	// request = { title: string, isbn: string, essay: string }
+	// requestは、ページ, 検索キーワードを含む
+	// request = { page: int, keyword: string }
 	request: Request,
 ) {
 	if (process.env.POSTGRES_ENABLE === 'false') {
@@ -15,22 +15,23 @@ export async function POST(
 		return response;
 	}
 	const readableStreamText = await new Response(request.body).text();
-	const { title, isbn, essay } = JSON.parse(readableStreamText);
+	const { page, keyword } = JSON.parse(readableStreamText);
+	const perPage = 10;
+	const skip = perPage * (page - 1);
+	const where = keyword === '' ? undefined : { title: { contains: keyword } };
 	try {
-		const data = await prisma.post.create({
-			data: {
-				title,
-				isbn,
-				essay
-			},
-			select: {
-				id: true,
-				title: true,
-				isbn: true,
-				essay: true
+		const data = await prisma.post.findMany(
+			{
+				skip: skip,
+				take: perPage,
+				where: where,
+				orderBy: {
+					id: 'desc',
+				},
 			}
-		});
-		const response = new Response(JSON.stringify({ data }), {
+		);
+		const maxPage = Math.ceil(await prisma.post.count({ where: where }) / perPage);
+		const response = new Response(JSON.stringify({ data, maxPage }), {
 			status: 200,
 			headers: {
 				'Content-Type': 'application/json'

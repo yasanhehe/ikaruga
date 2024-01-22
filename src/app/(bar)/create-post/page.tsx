@@ -65,7 +65,7 @@ const CreatePostPage =  () => {
 	};
 
 return (
-	<div className="flex flex-col pt-4 ml-4 sm:ml-[120px] md:ml-[280px] border-r pb-0 min-h-screen">
+	<div className="flex flex-col pt-4 ml-4 sm:ml-[120px] md:ml-[280px] pb-0 min-h-screen">
 		<span className="px-8 mt-10 font-bold text-3xl">Shohyo</span>
 		<form onSubmit={handleOnSubmit} className="px-8 py-6 w-full">
 			<div className="mb-6">
@@ -80,7 +80,7 @@ return (
 				/>
 			</div>
 			<div className="mb-6">
-				<label htmlFor="isbn" className="block text-2xl font-bold text-gray-700 mb-2">ISBN (任意)</label>
+				<label htmlFor="isbn" className="block text-2xl font-bold text-gray-700 mb-2">ISBN</label>
 				<input
 					type="text"
 					id="isbn"
