@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 
 const CreatePostPage =  () => {
 	const [title, setTitle] = React.useState('');
+	const [author, setAuthor] = React.useState('');
 	const [isbn, setIsbn] = React.useState('');
 	const [essay, setEssay] = React.useState('');
 	const [isConfirmed, setIsConfirmed] = React.useState(false);
@@ -12,6 +13,7 @@ const CreatePostPage =  () => {
 	const [essayLength, setEssayLength] = React.useState(0);
 	const router = useRouter();
 	const maxTitleLength = 50;
+	const maxAuthorLength = 50;
 	const maxIsbnLength = 13;
 	const maxEssayLength = 1000;
 
@@ -27,6 +29,7 @@ const CreatePostPage =  () => {
 				method: "POST",
 				body: JSON.stringify({
 					title,
+					author,
 					isbn,
 					essay,
 				}),
@@ -42,19 +45,29 @@ const CreatePostPage =  () => {
 	const handleOnChangeTitle = (
 		ev: React.ChangeEvent<HTMLInputElement>
 	) => {
+		ev.preventDefault();
 		setTitle(ev.target.value);
 		setTitleLength(ev.target.value.length);
 	};
 
+	const handleOnChangeAuthor = (
+		ev: React.ChangeEvent<HTMLInputElement>
+	) => {
+		ev.preventDefault();
+		setAuthor(ev.target.value);
+	}
+
 	const handleOnChangeIsbn = (
 		ev: React.ChangeEvent<HTMLInputElement>
 	) => {
+		ev.preventDefault();
 		setIsbn(ev.target.value);
 	};
 
 	const handleOnChangeEssay = (
 		ev: React.ChangeEvent<HTMLTextAreaElement>
 	) => {
+		ev.preventDefault();
 		//if (ev.target.value.length > maxEssayLength) return;
 		setEssay(ev.target.value);
 		setEssayLength(ev.target.value.length);
@@ -76,6 +89,17 @@ return (
 					value={title}
 					maxLength={maxTitleLength}
 					onChange={handleOnChangeTitle}
+					className="w-full h-12 px-4 rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 border"
+				/>
+			</div>
+			<div className="mb-6">
+				<label htmlFor="author" className="block text-2xl font-bold text-gray-700 mb-2">著者</label>
+				<input
+					type="text"
+					id="author"
+					value={author}
+					maxLength={maxAuthorLength}
+					onChange={handleOnChangeAuthor}
 					className="w-full h-12 px-4 rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 border"
 				/>
 			</div>

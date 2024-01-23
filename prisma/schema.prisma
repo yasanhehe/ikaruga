@@ -16,3 +16,11 @@ model Post {
 	isbn String
 	essay String
 }
+
+model Shohyo {
+	id Int @id @default(autoincrement())
+	title String
+	author String
+	isbn String
+	essay String
+}
