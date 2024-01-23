@@ -48,7 +48,7 @@ return (
             <div className="flex items-center">
               <button
                 onClick={() => handleToggleData(genre)}
-                className="w-full md:w-3/4 lg:w-1/3 text-black font-semibold bg-white rounded-xl py-2 px-4 shadow mx-4"
+                className="w-full md:w-3/4 lg:w-1/2 text-black font-semibold bg-white rounded-xl py-2 px-4 shadow mr-2"
                 style={{ fontSize: index < 3 ? '150%' : '100%' }}
               >
                 <span>
@@ -76,7 +76,7 @@ return (
             </div>
 
             {showData[genre] && (
-              <div className="mt-2 mx-4 rounded-md shadow-md p-4 w-full">
+              <div className="mt-2 mr-2 rounded-md shadow-md p-4 w-full">
                 <p>最新10件</p>
                 {data.map((item: Item, idx: number) => (
                   <div key={idx} className="shadow-md mb-2 p-4">
