@@ -5,7 +5,6 @@ import '@styles/Ajax.css';
 import rankingData from '@data/ranking.json';
 import Image from 'next/image';
 
-
 const images = ['/ikkocho2.svg', '/futaobichidori2.svg', '/sankocho2.svg'];
 const details = ['一紅鳥: イッコウチョウ', '二帯千鳥: フタオビチドリ', '三光鳥: サンコウチョウ'];
 
@@ -40,7 +39,8 @@ const Ranking: React.FC = () => {
   };
 
 return (
-    <div className="pl-4 pr-4 mb-20 w-2/3 md:w-full">
+    //<div className="flex flex-col w-full">
+	<div className="flex flex-col pt-4 ml-4 md:ml-[280px] pb-0 min-h-screen">
       {Object.entries(parsedRankingData).map(([genre, data]: [string, Item[]], index: number) => {
 
         return (
@@ -48,8 +48,8 @@ return (
             <div className="flex items-center">
               <button
                 onClick={() => handleToggleData(genre)}
-                className="w-full text-black font-semibold bg-white rounded-xl py-2 px-4 pyoverflow-hidden shadow mx-4"
-                style={{ width: '600px', fontSize: index < 3 ? '150%' : '100%' }}
+                className="w-full md:w-3/4 lg:w-1/3 text-black font-semibold bg-white rounded-xl py-2 px-4 shadow mx-4"
+                style={{ fontSize: index < 3 ? '150%' : '100%' }}
               >
                 <span>
                   {index < 3 ? (
@@ -76,7 +76,7 @@ return (
             </div>
 
             {showData[genre] && (
-              <div className="mt-2 rounded-md shadow-md p-4">
+              <div className="mt-2 mx-4 rounded-md shadow-md p-4 w-full">
                 <p>最新10件</p>
                 {data.map((item: Item, idx: number) => (
                   <div key={idx} className="shadow-md mb-2 p-4">
