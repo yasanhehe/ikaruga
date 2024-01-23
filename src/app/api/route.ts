@@ -15,17 +15,19 @@ export async function POST(
 		return response;
 	}
 	const readableStreamText = await new Response(request.body).text();
-	const { title, isbn, essay } = JSON.parse(readableStreamText);
+	const { title, author, isbn, essay } = JSON.parse(readableStreamText);
 	try {
-		const data = await prisma.post.create({
+		const data = await prisma.shohyo.create({
 			data: {
 				title,
+				author,
 				isbn,
 				essay
 			},
 			select: {
 				id: true,
 				title: true,
+				author: true,
 				isbn: true,
 				essay: true
 			}

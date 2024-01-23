@@ -6,6 +6,7 @@ interface BookReviewProps {
 	shohyo: {
 		id: string;
 		title: string;
+		author: string;
 		isbn: string;
 		essay: string;
 	};
@@ -26,6 +27,7 @@ function BookReview({ shohyo }: BookReviewProps) {
 				<a className="tracking-wide text-2xl text-indigo-500 font-semibold" href={searchUrl(shohyo.title, shohyo.isbn)}>
 					{shohyo.title}
 				</a>
+				<p className="mt-2 text-gray-500 text-xl font-bold mb-2">{shohyo.author}{shohyo.title.length === 0 ? null : ' 著'}</p>
 				<p className="mt-2 text-gray-500 text-xl whitespace-pre-line break-all">{shohyo.essay}</p>
 			</div>
 		</div>

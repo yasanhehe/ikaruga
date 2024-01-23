@@ -20,7 +20,7 @@ export async function POST(
 	const skip = perPage * (page - 1);
 	const where = keyword === '' ? undefined : { title: { contains: keyword } };
 	try {
-		const data = await prisma.post.findMany(
+		const data = await prisma.shohyo.findMany(
 			{
 				skip: skip,
 				take: perPage,
@@ -30,7 +30,7 @@ export async function POST(
 				},
 			}
 		);
-		const maxPage = Math.ceil(await prisma.post.count({ where: where }) / perPage);
+		const maxPage = Math.ceil(await prisma.shohyo.count({ where: where }) / perPage);
 		const response = new Response(JSON.stringify({ data, maxPage }), {
 			status: 200,
 			headers: {

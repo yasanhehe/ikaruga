@@ -8,6 +8,7 @@ import review_test from "@data/review_test.json";
 interface review_type {
 	id: string;
 	title: string;
+	author: string;
 	isbn: string;
 	essay: string;
 }
@@ -19,7 +20,7 @@ const ReadShare = () => {
 	const [keywordLength, setKeywordLength] = useState<number>(0);
 	const [searchAble, setSearchAble] = useState<boolean>(false);
 	const [keyword, setKeyword] = useState<string>('');
-	const [reviewData, setReviewData] = useState<{ id: string; title: string; isbn: string; essay: string; }[]>([]);
+	const [reviewData, setReviewData] = useState<{ id: string; title: string; author: string; isbn: string; essay: string; }[]>([]);
 	const [loading, setLoading] = useState<boolean>(true);
 
 
@@ -94,17 +95,17 @@ const ReadShare = () => {
 
 	const handleOnChangePage = async (ev: any) => {
 		ev.preventDefault();
-		console.warn(ev.currentTarget.value);
-		if (ev.currentTarget.value > maxPage) {
-			ev.currentTarget.value = maxPage;
-		} else if (ev.currentTarget.value == '') {
-			ev.currentTarget.value = '';
+		let val = ev.currentTarget.value;
+		if (val > maxPage) {
+			val = maxPage;
+		} else if (val == '') {
+			val = '';
 			return ;
-		} else if (ev.currentTarget.value < 1) {
-			ev.currentTarget.value = 2;
+		} else if (val < 1) {
+			val = 2;
 		}
-		setPage(parseInt(ev.currentTarget.value));
-		loadData(parseInt(ev.currentTarget.value), keyword);
+		setPage(parseInt(val));
+		loadData(parseInt(val), keyword);
 	}
 
 	useEffect(() => {
@@ -116,7 +117,7 @@ const ReadShare = () => {
 		/*<label htmlFor="search" className="block text-2xl font-bold text-gray-700 mb-2">検索</label>*/
 		<div className="flex flex-col pt-4 ml-4 md:ml-[280px] pb-0 min-h-screen">
 			<span className="px-8 mt-10 font-bold text-3xl">ReadShare</span>
-			<form onSubmit={handleOnSearch} className="md:px-8 py-6 w-full">
+			<form onSubmit={handleOnSearch} className="md:px-8 py-6 w-full px-4">
 				<div className="flex flex-row mb-6 md:my-4">
 					<input
 					type="text"
@@ -124,7 +125,7 @@ const ReadShare = () => {
 					value={keyword}
 					maxLength={maxKeywordLength}
 					onChange={handleOnChangeKeyword}
-					className="w-2/3 px-4 md:mx-4 mx-1 rounded-md shadow-xl focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 border border-gray-300"
+					className="w-2/3 px-4 md:mx-4 mx-1 rounded-md shadow focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 border border-gray-300"
 					/>
 					<button
 					type="submit"
@@ -150,7 +151,7 @@ const ReadShare = () => {
 					</div>
 				) : null }
 				{ maxPage == 0 ? (
-					<BookReview shohyo={{id: '', title: '', isbn: '', essay: '該当する本がありませんでした。'}} />
+					<BookReview shohyo={{id: '', title: '', author: '', isbn: '', essay: '該当する本がありませんでした。'}} />
 				): null}
 				{reviewData.map((data, index) => (
 						<BookReview key={index} shohyo={data} />
