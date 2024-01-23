@@ -117,7 +117,7 @@ const ReadShare = () => {
 		/*<label htmlFor="search" className="block text-2xl font-bold text-gray-700 mb-2">検索</label>*/
 		<div className="flex flex-col pt-4 ml-4 md:ml-[280px] pb-0 min-h-screen">
 			<span className="px-8 mt-10 font-bold text-3xl">ReadShare</span>
-			<form onSubmit={handleOnSearch} className="md:px-8 py-6 w-full">
+			<form onSubmit={handleOnSearch} className="md:px-8 py-6 w-full px-4">
 				<div className="flex flex-row mb-6 md:my-4">
 					<input
 					type="text"
@@ -125,7 +125,7 @@ const ReadShare = () => {
 					value={keyword}
 					maxLength={maxKeywordLength}
 					onChange={handleOnChangeKeyword}
-					className="w-2/3 px-4 md:mx-4 mx-1 rounded-md shadow-xl focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 border border-gray-300"
+					className="w-2/3 px-4 md:mx-4 mx-1 rounded-md shadow focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 border border-gray-300"
 					/>
 					<button
 					type="submit"

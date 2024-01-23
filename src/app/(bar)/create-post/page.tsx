@@ -89,7 +89,7 @@ return (
 					value={title}
 					maxLength={maxTitleLength}
 					onChange={handleOnChangeTitle}
-					className="w-full h-12 px-4 rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 border"
+					className="w-full h-12 px-4 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 border shadow"
 				/>
 			</div>
 			<div className="mb-6">
@@ -100,7 +100,7 @@ return (
 					value={author}
 					maxLength={maxAuthorLength}
 					onChange={handleOnChangeAuthor}
-					className="w-full h-12 px-4 rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 border"
+					className="w-full h-12 px-4 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 border shadow"
 				/>
 			</div>
 			<div className="mb-6">
@@ -112,7 +112,7 @@ return (
 					maxLength={maxIsbnLength}
 					onKeyPress={(e) => {if(e.key.match(/[^0-9]/)) e.preventDefault();}}
 					onChange={handleOnChangeIsbn}
-					className="w-full h-12 px-4 rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 border"
+					className="w-full h-12 px-4 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 border shadow"
 				/>
 			</div>
 			<div className="mb-6">
@@ -122,7 +122,7 @@ return (
 					value={essay}
 					maxLength={maxEssayLength}
 					onChange={handleOnChangeEssay}
-					className="w-full px-4 py-3 rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 border"
+					className="w-full px-4 py-3 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 border shadow"
 				/>
 				<p className="text-sm text-gray-500">{essayLength}/{maxEssayLength}</p>
 			</div>
@@ -133,7 +133,7 @@ return (
 						checked={isConfirmed}
 						disabled={essayLength === 0 || titleLength === 0}
 						onChange={handleConfirmationToggle}
-						className="form-checkbox h-6 w-6 text-blue-600 rounded-md border-gray-300 focus:ring-blue-500"
+						className="form-checkbox h-6 w-6 text-indigo-600 rounded-md border-gray-300 focus:ring-indigo-500"
 					/>
 					<span className="ml-2 text-xl text-gray-700">投稿を確認する</span>
 				</label>
@@ -141,7 +141,7 @@ return (
 			<button
 				type="submit"
 				disabled={!isConfirmed}
-				className={`w-full py-4 rounded-md text-white text-xl mb-20 ${isConfirmed ? 'bg-blue-500 hover:bg-blue-600' : 'bg-gray-300 cursor-not-allowed'}`}
+				className={`w-full py-4 rounded-md text-white text-xl mb-20 ${isConfirmed ? 'bg-indigo-500 hover:bg-indigo-600 shadow' : 'bg-gray-300 cursor-not-allowed'}`}
 			>
 				{isConfirmed ? '投稿する' : '確認が必要です'}
 			</button>
