@@ -9,6 +9,7 @@ const CreatePostPage =  () => {
 	const [isbn, setIsbn] = React.useState('');
 	const [essay, setEssay] = React.useState('');
 	const [isConfirmed, setIsConfirmed] = React.useState(false);
+	const [isSubmitting, setIsSubmitting] = React.useState(false);
 	const [titleLength, setTitleLength] = React.useState(0);
 	const [essayLength, setEssayLength] = React.useState(0);
 	const router = useRouter();
@@ -24,6 +25,7 @@ const CreatePostPage =  () => {
 			router.push('/');
 			return ;
 		}
+		if (isSubmitting) return;
 		try {
 			let ret = await fetch('/api', {
 				method: "POST",
@@ -140,8 +142,8 @@ return (
 			</div>
 			<button
 				type="submit"
-				disabled={!isConfirmed}
-				className={`w-full py-4 rounded-md text-white text-xl mb-20 ${isConfirmed ? 'bg-indigo-500 hover:bg-indigo-600 shadow' : 'bg-gray-300 cursor-not-allowed'}`}
+				disabled={!isConfirmed || isSubmitting}
+				className={`w-full py-4 rounded-md text-white text-xl mb-20 ${isConfirmed || !isSubmitting ? 'bg-indigo-500 hover:bg-indigo-600 shadow' : 'bg-gray-300 cursor-not-allowed'}`}
 			>
 				{isConfirmed ? '投稿する' : '確認が必要です'}
 			</button>

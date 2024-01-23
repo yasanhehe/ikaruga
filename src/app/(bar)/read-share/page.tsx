@@ -76,6 +76,7 @@ const ReadShare = () => {
 	const handleOnChangeKeyword = (
 		ev: React.ChangeEvent<HTMLInputElement>
 		) => {
+		ev.preventDefault();
 		setKeyword(ev.target.value);
 		setKeywordLength(ev.target.value.length);
 		setSearchAble(true);

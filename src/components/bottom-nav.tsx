@@ -16,6 +16,7 @@ const BottomNav = () => {
 		isReadShareActive,
 		isScanActive,
 		isCreatePostActive,
+		isHelpActive,
 	} = useNavigation();
 
 	return (
@@ -62,6 +63,14 @@ const BottomNav = () => {
 						<Icon icon="mingcute:pen-fill" width="32" height="32" />
 					) : (
 						<Icon icon="mingcute:pen-line" width="32" height="32" />
+					)}
+				</Link>
+
+				<Link href="/help" className="flex items-center">
+					{isHelpActive ? (
+						<Icon icon="gridicons:help" width="32" height="32" />
+					) : (
+						<Icon icon="gridicons:help-outline" width="32" height="32" />
 					)}
 				</Link>
 			</div>

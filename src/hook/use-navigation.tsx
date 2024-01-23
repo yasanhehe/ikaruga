@@ -9,12 +9,14 @@ const useNavigation = () => {
 	const [isReadShareActive, setIsReadShareActive] = useState(false);
 	const [isScanActive, setIsScanActive] = useState(false);
 	const [isCreatePostActive, setIsCreatePostActive] = useState(false);
+	const [isHelpActive, setIsHelpActive] = useState(false);
 
 	useEffect(() => {
 		setIsHomeActive(false);
 		setIsReadShareActive(false);
 		setIsScanActive(false);
 		setIsCreatePostActive(false);
+		setIsHelpActive(false);
 
 		switch (pathname) {
 			case '/':
@@ -29,6 +31,9 @@ const useNavigation = () => {
 			case '/create-post':
 				setIsCreatePostActive(true);
 				break;
+			case '/help':
+				setIsHelpActive(true);
+				break;
 			default:
 				break;
 		}
@@ -39,6 +44,7 @@ const useNavigation = () => {
 		isReadShareActive,
 		isScanActive,
 		isCreatePostActive,
+		isHelpActive
 	};
 };
 
