@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-const WHITE_IP = [''];
-const DISABLE = true;
+const WHITE_IP = [process.env.WHITE_IP];
+const DISABLE = process.env.ENABLE_MIDDLEWARE === 'false';
 
 export async function middleware(req: NextRequest) {
-	console.warn('jikkousaretayo!')
+	console.warn('jikkousaretayo! WHITE_IP: ', WHITE_IP);
 	const path = req.nextUrl.pathname;
 	const res = NextResponse.next();
 
@@ -20,7 +20,8 @@ export async function middleware(req: NextRequest) {
 		ip = forwardedFor.split(',')[0] ?? 'unknown_ip';
 	}
 
-	if (!WHITE_IP.includes(ip)) {
+	//書評投稿画面のみIP制限
+	if (!WHITE_IP.includes(ip) && path == '/create-post') {
 		//redirect先はFULL PATHで
 		const redirectUrl = new URL('/access-denied', req.url);
 		console.warn(redirectUrl.href);
