@@ -143,9 +143,9 @@ return (
 			<button
 				type="submit"
 				disabled={!isConfirmed || isSubmitting}
-				className={`w-full py-4 rounded-md text-white text-xl mb-20 ${isConfirmed || !isSubmitting ? 'bg-indigo-500 hover:bg-indigo-600 shadow' : 'bg-gray-300 cursor-not-allowed'}`}
+				className={`w-full py-4 rounded-md text-white text-xl mb-20 ${isConfirmed || isSubmitting ? 'bg-indigo-500 hover:bg-indigo-600 shadow' : 'bg-gray-300 cursor-not-allowed'}`}
 			>
-				{isConfirmed ? '投稿する' : '確認が必要です'}
+				{isConfirmed ? {isSubmitting ? '送信中...' : '投稿する'} : '確認が必要です'}
 			</button>
 		</form>
 	</div>

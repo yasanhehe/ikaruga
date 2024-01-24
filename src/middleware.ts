@@ -20,7 +20,8 @@ export async function middleware(req: NextRequest) {
 		ip = forwardedFor.split(',')[0] ?? 'unknown_ip';
 	}
 
-	if (!WHITE_IP.includes(ip)) {
+	//書評投稿画面のみIP制限
+	if (!WHITE_IP.includes(ip) && path == '/create-post') {
 		//redirect先はFULL PATHで
 		const redirectUrl = new URL('/access-denied', req.url);
 		console.warn(redirectUrl.href);
