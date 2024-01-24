@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-const WHITE_IP = [''];
-const DISABLE = true;
+const WHITE_IP = process.env.WHITE_IP.split(',') ?? [];
+const DISABLE = process.env.ENABLE_MIDDLEWARE === 'false';
 
 export async function middleware(req: NextRequest) {
-	console.warn('jikkousaretayo!')
+	console.warn('jikkousaretayo! WHITE_IP: ', WHITE_IP);
 	const path = req.nextUrl.pathname;
 	const res = NextResponse.next();
 
