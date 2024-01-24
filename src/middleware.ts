@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-const WHITE_IP = process.env.WHITE_IP.split(',') ?? [];
+const WHITE_IP = [process.env.WHITE_IP];
 const DISABLE = process.env.ENABLE_MIDDLEWARE === 'false';
 
 export async function middleware(req: NextRequest) {
