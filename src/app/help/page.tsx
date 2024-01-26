@@ -7,6 +7,14 @@ import review_test from "@data/review_test.json";
 import Image from 'next/image';
 import Help from "@components/help/help";
 
+import './styles.scss';
+
+// stylesheet作成のメモ
+// frame
+// 	title
+// 	what is this project
+// 	how to use
+// 	what is Ikaruga
 const HelpPage = () => {
 	return (
 		<div className="flex flex-col pt-4 ml-4 md:ml-[280px] pb-0 min-h-screen mb-20">

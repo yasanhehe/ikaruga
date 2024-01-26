@@ -1,36 +1,19 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Ikaruga
+## Ikarugaとは?
+我らが産技高専付属図書館は、多種多様の豊富な蔵書を誇るが、その利益を享受するのは一部の特殊階級に属する学生に限られる現状がある。
 
-## Getting Started
+Ikarugaは、全学生の共有財産たる図書館を、知を独占する搾取階級から開放せしめると共に、 同志学生諸君に図書館の利益を平等に享受する機会を与えんとする、特殊階級により制作されたアプリケーションである。
 
-First, run the development server:
+## 利用方法
+### Ranking
+過去3ヶ月に借りられた本のジャンルで順位を作成している。プルダウンをクリックすると、各ジャンルの最新10件が表示される。ランキングの1位2位3位はそれぞれの数字を名前に持つ鳥の名前に紐づけている。それぞれ、一紅鳥、二帯千鳥、三光鳥。
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### ReadShare
+書評画面で投稿された書評を読むことができる画面である。上部の検索バーで本の題名から検索が可能だ。タイムライン形式となっており、ページ下までスクロールすることで次のページへ遷移可能である。
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Shohyo
+書評を投稿することができる。
+学生諸君は是非、本学図書館の書籍活用に向け、有用な書評を書いてもらいたい。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Scan
+本のISBNの番号コードを読み取ると下のボックスにISBNが入力される。検索ボタンを押すことで学校の図書館で検索することが可能だ。
